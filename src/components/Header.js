@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 
-export default function Header() {
+export default function Header({ user }) {
     return (
             <AppBar position="static">
                 <Toolbar>
@@ -24,7 +24,9 @@ export default function Header() {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         d(o.o)b
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {
+                        user ? user.email : <Button color="inherit">Login</Button>
+                    }
                 </Toolbar>
             </AppBar>
     );
