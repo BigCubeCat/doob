@@ -10,7 +10,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Header() {
     return (
-        <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
@@ -23,11 +22,10 @@ export default function Header() {
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        News
+                        d(o.o)b
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
-        </Box>
     );
 }
