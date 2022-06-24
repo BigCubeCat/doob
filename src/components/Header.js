@@ -1,6 +1,5 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -8,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 
-export default function Header({ user }) {
+export default function Header({ user, logout }) {
     return (
             <AppBar position="static">
                 <Toolbar>
@@ -25,9 +24,12 @@ export default function Header({ user }) {
                         d(o.o)b
                     </Typography>
                     {
-                        user ? user.email : <Button color="inherit">Login</Button>
+                        user ?
+                            <Button color={'inherit'} onClick={logout}>{user.email}</Button>
+                            : <Button color="inherit">Login</Button>
                     }
                 </Toolbar>
             </AppBar>
     );
 }
+
