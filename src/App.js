@@ -16,7 +16,7 @@ function App() {
     }, [])
     return (
         <div className="App">
-            <Header user={session.user}/>
+            <Header user={session ? session.user ? session.user : null : null}/>
             <div className="container" style={{ padding: '50px 0 100px 0' }}>
                 {!session ? <Auth /> : <div>Welcome!</div> }
             </div>
