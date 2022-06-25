@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {HEX_COLORS, COLOR_BUTTON_SIZE} from '../consts';
+import {HEX_COLORS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SELECTED} from '../consts';
 import React, {useState} from 'react';
 
 export default function Colors({setCombinations}) {
@@ -34,13 +34,15 @@ export default function Colors({setCombinations}) {
                             sx={{
                               height: COLOR_BUTTON_SIZE,
                               width: COLOR_BUTTON_SIZE,
-                              backgroundColor: () =>
-                                  HEX_COLORS[value * 4 + val],
+                              borderRadius: combination.includes(value * 4 + val) ? 3 : 10,
+                              backgroundColor: HEX_COLORS[value * 4 + val],
                             }}
-                            elevation={combination.includes(value * 4 + val) ?
-                                24 :
-                                0}
-                        />
+                            elevation={10}
+                        >
+                          { /*
+                            combination.includes(value * 4 + val) ?  <img src='/frame.png' width={COLOR_BUTTON_SIZE} /> : null
+                          */ }
+                        </Paper>
                       </Grid>
                   ))}
                 </Grid>
