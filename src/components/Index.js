@@ -7,7 +7,7 @@ export default function Index() {
   return (
     <Fragment>
         <Colors />
-        <Playlist />
+        <Playlist combination={'01'}/>
     </Fragment>
   )
 }

@@ -5,6 +5,7 @@ import {
 } from '@mui/material';
 
 export default function Player({videoId}) {
+  console.warn(videoId)
   return (
       <Card sx={{display: 'flex'}}>
         <CardMedia
@@ -12,7 +13,6 @@ export default function Player({videoId}) {
         >
           <YouTube
               videoId={videoId}
-              style={{width: '10px', height: '10px'}}
           />
         </CardMedia>
       </Card>

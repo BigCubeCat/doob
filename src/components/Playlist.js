@@ -5,6 +5,9 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import {getTracksByColors} from '../database/methods';
+import {useEffect, useState} from 'react';
+import PlaylistSong from './PlaylistSong';
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -42,8 +45,23 @@ const AccordionDetails = styled(MuiAccordionDetails)(({theme}) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function Playlist() {
-  const [expanded, setExpanded] = React.useState('panel1');
+export default function Playlist({combination}) {
+  const [expanded, setExpanded] = React.useState('1');
+  const [queue, setQueue] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const [data, err] = await getTracksByColors(combination);
+      if (!err) {
+        console.log('data = ', data);
+        setQueue(data);
+      } else {
+        setQueue([]);
+      }
+
+    };
+    fetchData().catch(console.error);
+  }, []);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -51,40 +69,12 @@ export default function Playlist() {
 
   return (
       <div>
-        <Accordion expanded={expanded === 'panel2'}
-                   onChange={handleChange('panel2')}>
-          <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-            <Typography>Collapsible Group Item #2</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem
-              ipsum dolor
-              sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus
-              ex,
-              sit amet blandit leo lobortis eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion expanded={expanded === 'panel3'}
-                   onChange={handleChange('panel3')}>
-          <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-            <Typography>Collapsible Group Item #3</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem
-              ipsum dolor
-              sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus
-              ex,
-              sit amet blandit leo lobortis eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+        {queue ? queue.map((song, i) => {
+          return <PlaylistSong id={i} expanded={i == expanded}
+                               videoId={song.link.split('v=')[1]}
+                               title={song.title}
+                               handleChange={handleChange}/>;
+        }) : null}
       </div>
   );
 }
