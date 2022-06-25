@@ -10,7 +10,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 export default function Header({user, logout}) {
     return (
 
-        <AppBar position="static">
+        <AppBar position="static" style={{ background: '#2E3B55' }}>
             <Toolbar>
                 <IconButton
                     size="large"
