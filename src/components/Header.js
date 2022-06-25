@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
 
-export default function Header({user, logout}) {
+export default function Header({user, logout, setNotAuth}) {
     return (
 
         <AppBar position="static" style={{ background: '#2E3B55' }}>
@@ -27,7 +27,7 @@ export default function Header({user, logout}) {
                 {
                     user ?
                         <Button color={'inherit'} onClick={logout}><AccountCircle/></Button>
-                        : <Button color="inherit">Login</Button>
+                        : <Button color="inherit" onClick={() => setNotAuth(false)}>Login</Button>
                 }
             </Toolbar>
         </AppBar>

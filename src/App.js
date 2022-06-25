@@ -24,15 +24,20 @@ function App() {
   }, []);
   return (
       <div className="App">
-        <Header user={session ? session.user ? session.user : null : null}
-                logout={userSignOut}/>
+        <Header
+            user={session ? session.user ? session.user : null : null}
+            logout={userSignOut}
+            setNotAuth={setNotAuth}
+        />
         <div className="Container" style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
           {
-            (!session && !notAuth) ? <Auth setNotAuth={setNotAuth}/> : <Index/>
+            (!session && !notAuth) ?
+                <Auth setNotAuth={setNotAuth}/> :
+                <Index user={session ? session.user : undefined}/>
           }
         </div>
       </div>

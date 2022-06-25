@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 import {HEX_COLORS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SELECTED} from '../consts';
 import React, {useState} from 'react';
 
-export default function Colors({setCombinations}) {
+export default function Colors({buttonScale = 1, setCombinations}) {
   const [combination, setCombination] = useState([]);
   const [combinationString, setCombinationString] = useState('');
 
@@ -37,8 +37,8 @@ export default function Colors({setCombinations}) {
                         <Paper
                             onClick={() => handleClick(value * 4 + val)}
                             sx={{
-                              height: COLOR_BUTTON_SIZE,
-                              width: COLOR_BUTTON_SIZE,
+                              height: COLOR_BUTTON_SIZE * buttonScale,
+                              width: COLOR_BUTTON_SIZE * buttonScale,
                               borderRadius: combination.includes(value * 4 + val) ? 3 : 10,
                               backgroundColor: HEX_COLORS[value * 4 + val],
                             }}
