@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 
 export default function Player({videoId}) {
-  console.warn(videoId);
   return (
       <Card sx={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
         <CardMedia>
