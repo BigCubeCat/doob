@@ -15,7 +15,7 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function Auth({ setNotAuth }) {
+export default function Auth({setNotAuth}) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [isGuest, setIsGuest] = useState(false);
@@ -23,7 +23,7 @@ export default function Auth({ setNotAuth }) {
     e.preventDefault();
     if (isGuest) {
       setNotAuth(true);
-      return
+      return;
     }
 
     try {
@@ -43,7 +43,7 @@ export default function Auth({ setNotAuth }) {
         <Container component="main" maxWidth="xs">
           <CssBaseline/>
           {loading ? (
-                  'Sending magic link...'
+                  <h2>Ссылка для входа отправлена на почту!</h2>
               ) :
               <Box
                   sx={{
@@ -53,11 +53,11 @@ export default function Auth({ setNotAuth }) {
                     alignItems: 'center',
                   }}
               >
-                <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                <Avatar sx={{m: 1, bgcolor: 'primary.main'}}>
                   <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                  Sign in
+                  Вход
                 </Typography>
                 <Box component="form" onSubmit={handleLogin} noValidate
                      sx={{mt: 1}}>
@@ -76,15 +76,16 @@ export default function Auth({ setNotAuth }) {
                       type="submit"
                       fullWidth
                       variant="contained"
-                      sx={{mt: 3, mb: 2}}
+                      sx={{mt: 3, mb: 1, bgcolor: 'primary.main'}}
                   >
                     Войти
                   </Button>
+                  <p>или</p>
                   <Button
                       onClick={() => setIsGuest(true)}
                       type="submit"
                       fullWidth
-                      sx={{mt: 3, mb: 2}}
+                      sx={{mt: 1, mb: 2}}
                   >
                     Зайти гостем
                   </Button></Box>

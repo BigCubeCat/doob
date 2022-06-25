@@ -35,7 +35,7 @@ export default function Playlist({combination, user}) {
       <div>
         {queue ? queue.map((song, i) => {
           return <PlaylistSong
-              id={i} expanded={i == expanded}
+              id={i} expanded={i === expanded}
               videoId={getTrackId(song.link)}
               title={song.title}
               songId={song.id}
