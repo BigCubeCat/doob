@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Index from "./components/Index";
 import {supabase} from "./database/supabaseClient";
 import React, {useState, useEffect} from "react";
 import Auth from "./database/Auth";
@@ -26,7 +27,7 @@ function App() {
         <div className="App">
             <Header user={session ? session.user ? session.user : null : null} logout={userSignOut}/>
             <div className="container" style={{padding: '50px 0 100px 0'}}>
-                {!session ? <Auth/> : <Playlist />}
+                {!session ? <Auth/> : <Playlist/>}
             </div>
         </div>
     );

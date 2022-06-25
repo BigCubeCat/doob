@@ -4,10 +4,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 
 export default function Header({user, logout}) {
     return (
+
         <AppBar position="static">
             <Toolbar>
                 <IconButton
@@ -24,11 +26,10 @@ export default function Header({user, logout}) {
                 </Typography>
                 {
                     user ?
-                        <Button color={'inherit'} onClick={logout}>{user.email}</Button>
+                        <Button color={'inherit'} onClick={logout}><AccountCircle/></Button>
                         : <Button color="inherit">Login</Button>
                 }
             </Toolbar>
         </AppBar>
     );
 }
-
