@@ -36,3 +36,48 @@
     transform: rotate(360deg);
   }
 }
+
+.blockContainer {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  align-self: center;
+  justify-self: center;
+  width: 250px;
+  height: 500px;
+}
+
+.bloc {
+  width: 100px;
+  height: 100px;
+  align-self: center;
+  justify-self: center;
+}
+
+.bloc:hover {
+  animation-name: eff;
+  animation-duration: .3s
+}
+
+@keyframes eff {
+  0% {
+    transform: scale(1)
+  }
+
+  25% {
+    transform: scale(1.05)
+  }
+
+  50% {
+    transform: scale(1.1)
+  }
+
+  75% {
+    transform: scale(1.05)
+  }
+
+  100% {
+    transform: scale(1.0)
+  }
+}

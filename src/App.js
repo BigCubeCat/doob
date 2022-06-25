@@ -1,14 +1,34 @@
-import './App.css';
 import Header from "./components/Header";
+import Index from "./components/Index";
+import {supabase} from "./database/supabaseClient";
+import React, {useState, useEffect} from "react";
+import Auth from "./database/Auth";
+import {useDispatch, useSelector} from "react-redux";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Header />
-      </header>
-    </div>
-  );
+    const [session, setSession] = useState(null)
+    const dispatch = useDispatch();
+    const currentWindow = useSelector(state => state).window_id;
+
+    const userSignOut = () => {
+        supabase.auth.signOut();
+    }
+
+    useEffect(() => {
+        setSession(supabase.auth.session())
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+    }, [])
+    return (
+        <div className="App">
+            <Header user={session ? session.user ? session.user : null : null} logout={userSignOut}/>
+            <div className="Container" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                {!session ? <Auth/> : <Index/>}
+            </div>
+        </div>
+    );
 }
 
 export default App;
