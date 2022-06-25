@@ -46,7 +46,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({theme}) => ({
 }));
 
 export default function Playlist({combination}) {
-  const [expanded, setExpanded] = React.useState('1');
+  const [expanded, setExpanded] = React.useState('0');
   const [queue, setQueue] = useState([]);
 
   useEffect(() => {

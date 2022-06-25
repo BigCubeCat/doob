@@ -5,15 +5,17 @@ import {
 } from '@mui/material';
 
 export default function Player({videoId}) {
-  console.warn(videoId)
+  console.warn(videoId);
   return (
-      <Card sx={{display: 'flex'}}>
-        <CardMedia
-            sx={{width: 151}}
-        >
-          <YouTube
-              videoId={videoId}
-          />
+      <Card sx={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
+        <CardMedia>
+            <YouTube
+                opts={{
+                  height: '75%',
+                  width: '100%',
+                }}
+                videoId={videoId}
+            />
         </CardMedia>
       </Card>
   );
