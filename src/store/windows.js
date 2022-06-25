@@ -1,4 +1,4 @@
 export const WINDOWS = {
     START: 0,
-    LOGIN: 1,
+    MAIN_WINDOW: 1,
 }
