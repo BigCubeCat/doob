@@ -24,7 +24,7 @@ function App() {
     return (
         <div className="App">
             <Header user={session ? session.user ? session.user : null : null} logout={userSignOut}/>
-            <div className="Container">
+            <div className="Container" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                 {!session ? <Auth/> : <Index/>}
             </div>
         </div>

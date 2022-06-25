@@ -8,8 +8,9 @@ export default function PlaylistSong(
 ) {
   return (
       <Accordion expanded={expanded}
-                 onChange={handleChange(id)}>
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                 onChange={handleChange(id)}
+                style={{maxHeight: '209px', margin: "10px"}}>
+        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" style= {{background: '#f7f5f5'}}>
           <Typography>{title}</Typography>
         </AccordionSummary>
         <Player videoId={videoId}/>

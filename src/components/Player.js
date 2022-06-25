@@ -6,7 +6,7 @@ import {
 
 export default function Player({videoId}) {
   return (
-      <Card sx={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
+      <Card sx={{background: '#e8e8e8', display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
         <CardMedia>
             <YouTube
                 opts={{

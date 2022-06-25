@@ -3,6 +3,12 @@ import {getTracksByColors} from '../database/methods';
 import {useEffect, useState} from 'react';
 import PlaylistSong from './PlaylistSong';
 
+function getTrackId(url) {
+  if (url.includes('.be/')) {
+    return url.split('.be/')[1];
+  }
+  return url.split('v=')[1];
+}
 
 export default function Playlist({combination}) {
   const [expanded, setExpanded] = React.useState('0');
@@ -29,7 +35,7 @@ export default function Playlist({combination}) {
       <div>
         {queue ? queue.map((song, i) => {
           return <PlaylistSong id={i} expanded={i == expanded}
-                               videoId={song.link.split('v=')[1]}
+                               videoId={getTrackId(song.link)}
                                title={song.title}
                                handleChange={handleChange}/>;
         }) : null}
