@@ -48,14 +48,14 @@
   height: 500px;
 }
 
-.block {
+.bloc {
   width: 100px;
   height: 100px;
   align-self: center;
   justify-self: center;
 }
 
-.block:hover {
+.bloc:hover {
   animation-name: eff;
   animation-duration: .3s
 }
@@ -80,28 +80,4 @@
   100% {
     transform: scale(1.0)
   }
-}
-
-.box {
-  display: flex !important;
-  align-items: center;
-}
-
-.song-title {
-  margin-left: 20px;
-}
-
-.controls {
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.controls .button {
-  margin: 5px;
-}
-
-.current-track {
-  width: 80%;
 }

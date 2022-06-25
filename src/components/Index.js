@@ -1,16 +1,13 @@
 import React, {Fragment} from 'react';
 
-// import Header from "./Header";
 import Colors from "./Colors";
-import TabPlaylist from "./TabPlaylist";
-import UploadVideo from './UploadVideo';
+import Playlist from './Playlist';
 
 export default function Index() {
   return (
     <Fragment>
         <Colors />
-        <UploadVideo />
-        <TabPlaylist />
+        <Playlist />
     </Fragment>
   )
 }

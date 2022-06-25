@@ -4,8 +4,6 @@ import {supabase} from "./database/supabaseClient";
 import React, {useState, useEffect} from "react";
 import Auth from "./database/Auth";
 import {useDispatch, useSelector} from "react-redux";
-import Player from "./components/Player";
-import Playlist from "./components/Playlist";
 
 function App() {
     const [session, setSession] = useState(null)
@@ -26,9 +24,7 @@ function App() {
     return (
         <div className="App">
             <Header user={session ? session.user ? session.user : null : null} logout={userSignOut}/>
-            <div className="container" style={{padding: '50px 0 100px 0'}}>
-                {!session ? <Auth/> : <Playlist/>}
-            </div>
+            {!session ? <Auth/> : <Index/>}
         </div>
     );
 }
