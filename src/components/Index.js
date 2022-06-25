@@ -8,7 +8,6 @@ export default function Index() {
   return (
     <Fragment>
         <Colors setCombinations={comb => {
-          console.log("comb =", comb)
           setCombination(comb)
         }} />
         <Playlist combination={combination}/>

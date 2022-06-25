@@ -5,17 +5,22 @@ import React, {useState} from 'react';
 
 export default function Colors({setCombinations}) {
   const [combination, setCombination] = useState([]);
+  const [combinationString, setCombinationString] = useState("");
 
   const handleClick = id => {
     if (combination.length < 2) {
       setCombination([...combination, id]);
     } else {
-      let _comb = combination;
+      let _comb = [];
       _comb.push(id);
-      setCombination(_comb.slice(-2));
+      setCombination(_comb);
     }
-    setCombinations(combination[0] + '' + combination[1]);
+    setCombinationString(combination[0] + '' + combination[1]);
   };
+  if (combination.length === 2) {
+    let combString = combination[0] + "" + combination[1];
+    setCombinations(combString);
+  }
   return (
       <Grid sx={{flexGrow: 1}} container spacing={2}>
         {[0, 1].map((value) => (
@@ -31,6 +36,7 @@ export default function Colors({setCombinations}) {
                             backgroundColor: () =>
                                 HEX_COLORS[value * 3 + val],
                           }}
+                          elevation={combination.includes(value * 3 + val) ? 24 : 0}
                       />
                     </Grid>
                 ))}

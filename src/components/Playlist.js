@@ -9,6 +9,7 @@ export default function Playlist({combination}) {
   const [queue, setQueue] = useState([]);
 
   useEffect(() => {
+    console.log('here')
     const fetchData = async () => {
       const [data, err] = await getTracksByColors(combination);
       if (!err) {
@@ -19,7 +20,7 @@ export default function Playlist({combination}) {
 
     };
     fetchData().catch(console.error);
-  }, []);
+  }, [combination]);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
