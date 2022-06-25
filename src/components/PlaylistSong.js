@@ -24,8 +24,12 @@ export default function PlaylistSong(
         {user ? <div style={{display: 'flex', flexDirection: 'row'}}>
           <Player videoId={videoId}/>
           <Colors buttonScale={0.75} setCombinations={comb => {
-            updateColors(songId, comb);
-          }}/>
+            const fetchRequest = async () => {
+              await updateColors(songId, comb);
+            };
+            fetchRequest().catch(console.error);
+          }}
+          />
           }
         </div> : <Player videoId={videoId}/>
         }
