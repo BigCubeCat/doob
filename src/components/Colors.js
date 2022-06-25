@@ -37,7 +37,7 @@ export default function Colors({setCombinations}) {
                               backgroundColor: () =>
                                   HEX_COLORS[value * 4 + val],
                             }}
-                            elevation={combination.includes(value * 3 + val) ?
+                            elevation={combination.includes(value * 4 + val) ?
                                 24 :
                                 0}
                         />
