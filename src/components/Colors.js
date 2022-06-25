@@ -18,7 +18,12 @@ export default function Colors({setCombinations}) {
     setCombinationString(combination[0] + '' + combination[1]);
   };
   if (combination.length === 2) {
-    let combString = combination[0] + '' + combination[1];
+    let combString;
+    if (combination[0] > combination[1]) {
+      combString = combination[1] + '' + combination[0];
+    } else {
+      combString = combination[0] + '' + combination[1];
+    }
     setCombinations(combString);
   }
   return (
