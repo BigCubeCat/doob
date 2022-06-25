@@ -29,7 +29,7 @@ export default function Colors({setCombinations}) {
                 {[0, 1, 2, 3].map((val) => (
                     <Grid key={val} item>
                       <Paper
-                          onClick={() => handleClick(value * 3 + val)}
+                          onClick={() => handleClick(value * 4 + val)}
                           sx={{
                             height: COLOR_BUTTON_SIZE,
                             width: COLOR_BUTTON_SIZE,
