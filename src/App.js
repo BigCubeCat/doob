@@ -1,5 +1,6 @@
 import './App.css';
 import Header from "./components/Header";
+import Index from "./components/Index";
 import {supabase} from "./database/supabaseClient";
 import React, {useState, useEffect} from "react";
 import Auth from "./database/Auth";
@@ -24,9 +25,9 @@ function App() {
     }, [])
     return (
         <div className="App">
-            <Header user={session ? session.user ? session.user : null : null} logout={userSignOut}/>
-            <div className="container" style={{padding: '50px 0 100px 0'}}>
-                {!session ? <Auth/> : <div>Welcome!</div>}
+            <Header user={session ? session.user ? session.user : null : null} logout={userSignOut} className="headerContainer" />
+            <div className="container" style={{padding: '50px 0 100px 0', position: 'relative'}}>
+                {!session ? <Auth /> : <Index />}
             </div>
         </div>
     );
