@@ -12,19 +12,23 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import {addNewTrack} from '../database/methods';
 import RateColors from './RateColors';
+import {useSelector} from 'react-redux';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function AddSong({open, handleClose}) {
+
+  const isCartoons = useSelector(state => state).is_cartoons;
+
   const [textLink, setTextLink] = React.useState(
       'https://youtu.be/dQw4w9WgXcQ');
 
   const [title, setTitle] = React.useState('Rickrolled!');
   const [combinations, setCombinations] = React.useState('00');
   const submitRequest = async () => {
-    await addNewTrack(title, textLink, combinations);
+    await addNewTrack(title, textLink, combinations, isCartoons);
   }
   return (
       <Dialog

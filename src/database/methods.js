@@ -26,10 +26,11 @@ async function addToMemory(id) {
  * @param {string} title Track title
  * @param {string} link Track youtube url
  * @param {string} comb combination
+ * @param {bool} isCartoons
  * @returns {Promise<null|*>}
  */
-export async function addNewTrack(title, link, comb) {
-  let {data, err} = await supabase.from('tracks').insert([
+export async function addNewTrack(title, link, comb, isCartoons=false) {
+  let {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').insert([
     {
       'title': title,
       'link': link,
@@ -58,10 +59,11 @@ export async function getAllTracks() {
 
 /**
  * @param colors {string}
+ * @param isCartoons {bool}
  * @returns {Promise<any[][]|*[]>}
  */
-export async function getTracksByColors(colors) {
-  const {data, err} = await supabase.from('tracks').
+export async function getTracksByColors(colors, isCartoons) {
+  const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
       select().
       eq('combination', colors).
       limit(SELECT_LIMIT);

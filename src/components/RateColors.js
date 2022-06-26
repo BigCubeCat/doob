@@ -2,8 +2,10 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {HEX_COLORS, COLOR_BUTTON_SIZE} from '../consts';
 import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
 
 export default function RateColors({buttonScale = 1, setCombinations}) {
+  const isCartoons = useSelector(state => state).is_cartoons;
   const [combination, setCombination] = useState([]);
   const [combinationString, setCombinationString] = useState('');
 
@@ -31,8 +33,8 @@ export default function RateColors({buttonScale = 1, setCombinations}) {
       <div style={{padding: 10}}>
         <h1 style={{fontSize: '12px', color: '#616161'}}>Выберите два цвета,
           которые, по
-          вашему мнению, лучше всего подходят
-          этой песне:</h1>
+          вашему мнению, лучше всего подходят {isCartoons ? "этому видео" : "этой песне"}
+        </h1>
         <Grid sx={{flexGrow: 1}} container spacing={2}>
           {[0, 1].map((value) => (
               <Grid item xs={12}>

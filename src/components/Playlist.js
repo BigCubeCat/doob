@@ -2,6 +2,7 @@ import * as React from 'react';
 import {getTracksByColors} from '../database/methods';
 import {useEffect, useState} from 'react';
 import PlaylistSong from './PlaylistSong';
+import {useSelector} from 'react-redux';
 
 function getTrackId(url) {
   if (url.includes('.be/')) {
@@ -11,13 +12,13 @@ function getTrackId(url) {
 }
 
 export default function Playlist({combination, user}) {
+  const isCartoons = useSelector(state => state).is_cartoons;
   const [expanded, setExpanded] = React.useState('0');
   const [queue, setQueue] = useState([]);
 
   useEffect(() => {
-    console.log('here');
     const fetchData = async () => {
-      const [data, err] = await getTracksByColors(combination);
+      const [data, err] = await getTracksByColors(combination, isCartoons);
       if (!err) {
         setQueue(data);
       } else {
