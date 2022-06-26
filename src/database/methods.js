@@ -61,17 +61,30 @@ export async function getAllTracks() {
 /**
  * @param colors {string}
  * @param isCartoons {bool}
+ * @param userSongs {Array}
  * @returns {Promise<any[][]|*[]>}
  */
-export async function getTracksByColors(colors, isCartoons) {
-  const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
-      select().
-      eq('combination', colors).
-      limit(SELECT_LIMIT);
-  if (err) {
-    return [null, err];
+export async function getTracksByColors(
+    colors, isCartoons,userSongs=[]) {
+  if (userSongs.length === 0) {
+    const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
+        select().
+        eq('combination', colors).
+        limit(SELECT_LIMIT);
+    if (err) {
+      return [null, err];
+    }
+    return [data, null];
+  } else {
+    const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
+        select().eq('combination', colors).in('id', userSongs).
+        limit(SELECT_LIMIT);
+
+    if (err) {
+      return [null, err];
+    }
+    return [data, null];
   }
-  return [data, null];
 }
 
 /**
