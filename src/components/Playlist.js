@@ -27,7 +27,7 @@ export default function Playlist({combination, user}) {
 
     };
     fetchData().catch(console.error);
-  }, [combination]);
+  }, [combination, isCartoons]);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
