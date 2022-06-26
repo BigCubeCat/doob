@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {HEX_COLORS, COLOR_BUTTON_SIZE, COLOR_BUTTON_SELECTED} from '../consts';
+import {HEX_COLORS, COLOR_BUTTON_SIZE} from '../consts';
 import React, {useState} from 'react';
 
 export default function RateColors({buttonScale = 1, setCombinations}) {
