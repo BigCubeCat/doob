@@ -37,7 +37,7 @@ export default function AddSong({open, handleClose}) {
           onClose={handleClose}
           TransitionComponent={Transition}
       >
-        <AppBar sx={{position: 'relative', backgroundColor: '#2E3B55'}}>
+        <AppBar position="static" style={{background: isCartoons ? "#cf1302" : '#2E3B55'}}>
           <Toolbar>
             <IconButton
                 edge="start"
@@ -48,7 +48,7 @@ export default function AddSong({open, handleClose}) {
               <CloseIcon/>
             </IconButton>
             <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
-              Предложить {isCartoons ? "мультфильм" : "песню" }
+              Предложить {isCartoons ? "мультфильм" : "песню" }t
             </Typography>
             <Button autoFocus color="inherit" onClick={() => {
               handleClose();
