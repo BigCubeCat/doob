@@ -48,14 +48,9 @@ export default function AddSong({open, handleClose}) {
               <CloseIcon/>
             </IconButton>
             <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
-              Предложить {isCartoons ? "мультфильм" : "песню" }t
+              Предложить {isCartoons ? "мультфильм" : "песню" }
             </Typography>
-            <Button autoFocus color="inherit" onClick={() => {
-              handleClose();
-              submitRequest().catch(console.error)
-            }}>
-              Отправить
-            </Button>
+
           </Toolbar>
         </AppBar>
         <Divider/>
@@ -84,6 +79,12 @@ export default function AddSong({open, handleClose}) {
               onChange={e => setTextLink(e.target.value)}
           />
           <RateColors buttonScale={0.60} setCombinations={setCombinations} />
+          <Button variant='contained' autoFocus color="inherit" onClick={() => {
+            handleClose();
+            submitRequest().catch(console.error)
+          }}>
+            Отправить
+          </Button>
         </Box>
       </Dialog>
   );
