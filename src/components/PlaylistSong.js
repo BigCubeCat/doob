@@ -30,7 +30,6 @@ export default function PlaylistSong(
             fetchRequest().catch(console.error);
           }}
           />
-          }
         </div> : <Player videoId={videoId}/>
         }
         <AccordionDetails>
