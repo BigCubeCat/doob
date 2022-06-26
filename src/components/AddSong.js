@@ -47,7 +47,7 @@ export default function AddSong({open, handleClose}) {
             >
               <CloseIcon/>
             </IconButton>
-            <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
+            <Typography sx={{ml: 10, flex: 1}} variant="h6" component="div">
               Предложить {isCartoons ? "мультфильм" : "песню" }
             </Typography>
 

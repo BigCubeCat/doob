@@ -41,6 +41,7 @@ export default function Auth({setNotAuth}) {
 
   return (
       <ThemeProvider theme={theme}>
+
         <Container component="main" maxWidth="xs">
           <CssBaseline/>
           {loading ? (
@@ -54,9 +55,11 @@ export default function Auth({setNotAuth}) {
                     alignItems: 'center',
                   }}
               >
-                <Avatar sx={{m: 1, bgcolor: 'primary.main'}}>
-                  <LockOutlinedIcon/>
-                </Avatar>
+                <h3>Мы тебя понимаем!
+                  Выбери цвет и получи персональную подборку контента
+                </h3>       <Avatar sx={{m: 1, bgcolor: 'primary.main'}}>
+                <LockOutlinedIcon/>
+              </Avatar>
                 <Typography component="h1" variant="h5">
                   Вход
                 </Typography>

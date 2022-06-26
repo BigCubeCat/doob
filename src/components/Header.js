@@ -9,28 +9,27 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setIsCartoons} from '../store/actions';
 import {Switch} from '@mui/material';
 
-export default function Header({user, logout, setNotAuth}) {
+export default function Header({user, logout, setNotAuth, isAuthWindow}) {
   const dispatch = useDispatch(); // Получаем диспатч из хука
   const isCartoons = useSelector(state => state).is_cartoons;
-  return (
-
-      <AppBar position="static" style={{background: isCartoons ? "#cf1302" : '#5edfff'}}>
-        <Toolbar>
-          <Switch color="default" onClick={() => {
-            dispatch(setIsCartoons(true));
-          }}/>
-          <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-            d(o.o)b
-          </Typography>
-          {
-            user ?
-                <Button color={'inherit'}
-                        onClick={logout}><AccountCircle/></Button>
-                :
-                <Button color="inherit"
-                        onClick={() => setNotAuth(false)}>Войти</Button>
-          }
-        </Toolbar>
-      </AppBar>
-  );
+  let rightButton;
+  if (!isAuthWindow) {
+    rightButton = (user) ?
+        <Button color={'inherit'}
+                onClick={logout}><AccountCircle/></Button> :
+        <Button color="inherit"
+                onClick={() => setNotAuth(false)}>Войти</Button>;
+  }
+  return (<AppBar position="static"
+                  style={{background: isCartoons ? '#cf1302' : '#5edfff'}}>
+    <Toolbar>
+      <Switch color="default" onClick={() => {
+        dispatch(setIsCartoons(true));
+      }}/>
+      <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+        d(o.o)b {isCartoons ? "Kids" : null}
+      </Typography>
+      {rightButton}
+    </Toolbar>
+  </AppBar>);
 }

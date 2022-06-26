@@ -48,9 +48,10 @@ function App() {
                  '#cdf1fa'} 70%, white 100%`,
            }}>
         <Header
-            user={session ? session.user ? session.user : null : null}
+            user={session ? session.user : null}
             logout={userSignOut}
             setNotAuth={setNotAuth}
+            isAuthWindow={!session && !notAuth}
         />
         <div className="Container" style={{
           display: 'flex',

@@ -19,7 +19,7 @@ export default function Index({user}) {
         <Colors setCombinations={comb => {
           setCombination(comb);
         }}/>
-        <Playlist combination={combination} user={user}/>
+        <Playlist combination={combination} user={user} />
       </div>
   );
 }

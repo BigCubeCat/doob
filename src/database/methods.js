@@ -138,17 +138,13 @@ export async function createNewUserData(user_id) {
       select().
       eq('user_id', user_id);
   if (err) {
-    console.error(err)
     return ;
   }
   if (data.length == 0) {
-    console.log("HEHRHRHRHRH")
     const {data, err} = (await supabase.from('user_data').insert({
       'user_id': user_id,
       'tracks': [],
     }));
-    console.log(err)
-    console.log("data = ", data)
   }
   return null;
 }
