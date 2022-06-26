@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {getTracksByColors} from '../database/methods';
+import {getTracksByColors, getUserFavorites} from '../database/methods';
 import {useEffect, useState} from 'react';
 import PlaylistSong from './PlaylistSong';
 import {useSelector} from 'react-redux';
@@ -19,15 +19,13 @@ export default function Playlist({combination, user}) {
   const isCartoons = useSelector(state => state).is_cartoons;
   const [expanded, setExpanded] = React.useState('0');
   const [queue, setQueue] = useState([]);
-  const [tabId, setTabId] = React.useState(1);
+  const [tabId, setTabId] = React.useState(0);
 
   useEffect(() => {
-    let userSongs = [];
-    if (tabId === 1) {
-      // todo
-    }
-    const fetchData = async (userSongs) => {
-      const [data, err] = await getTracksByColors(combination, isCartoons, userSongs);
+    const fetchData = async () => {
+      const [data, err] = await getTracksByColors(combination, isCartoons,
+          tabId === 1 ?
+              (await getUserFavorites(user ? user.id : '')) : null);
       if (!err) {
         setQueue(data);
       } else {
@@ -35,7 +33,7 @@ export default function Playlist({combination, user}) {
       }
 
     };
-    fetchData(userSongs).catch(console.error);
+    fetchData().catch(console.error);
   }, [combination, isCartoons, tabId]);
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -61,7 +59,7 @@ export default function Playlist({combination, user}) {
               title={song.title}
               songId={song.id}
               handleChange={handleChange}
-              user={user}
+              user={user} isMy={tabId === 1}
           />;
         }) : null}
       </div>

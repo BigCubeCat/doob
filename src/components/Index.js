@@ -8,7 +8,7 @@ export default function Index({user}) {
   const [combination, setCombination] = useState('');
   useEffect(() => {
     const createUserDataIfNotExists = async () => {
-      await createNewUserData(user.id);
+      await createNewUserData(user ? user.id : '');
     };
     createUserDataIfNotExists().catch(console.warn);
 

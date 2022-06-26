@@ -66,7 +66,7 @@ export async function getAllTracks() {
  */
 export async function getTracksByColors(
     colors, isCartoons, userSongs = []) {
-  if (userSongs.length === 0) {
+  if (userSongs == null) {
     const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
         select().
         eq('combination', colors).
@@ -138,23 +138,32 @@ export async function createNewUserData(user_id) {
       select().
       eq('user_id', user_id);
   if (err) {
-    return;
+    console.error(err)
+    return ;
   }
-  if (data.length === 0) {
-    await supabase.from('user_data').insert({
+  if (data.length == 0) {
+    console.log("HEHRHRHRHRH")
+    const {data, err} = (await supabase.from('user_data').insert({
       'user_id': user_id,
       'tracks': [],
-    });
+    }));
+    console.log(err)
+    console.log("data = ", data)
   }
   return null;
 }
 
 export async function getUserFavorites(user_id) {
+  if (!user_id) return ;
   const {data, err} = await supabase.from('user_data').
       select('tracks').
       eq('user_id', user_id);
   if (err) {
     return;
   }
-  return data[0]['tracks'];
+  try {
+    return data[0]['tracks'];
+  } catch (e) {
+    return ;
+  }
 }

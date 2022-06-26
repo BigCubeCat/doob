@@ -34,7 +34,7 @@ function App() {
     });
   }, []);
 
-  const songDialog = <AddSong open={open} handleClose={handleClose} />
+  const songDialog = <AddSong open={open} handleClose={handleClose}/>;
 
   if (open) {
     return songDialog;
@@ -42,7 +42,11 @@ function App() {
   // #e6e8fc #2E3B55
   return (
       <div className="App"
-           style={{background: `linear-gradient(to bottom,  white 0%, ${isCartoons ? '#ffe0e0' : '#cdf1fa'} 70%, white 100%`}}>
+           style={{
+             background: `linear-gradient(to bottom,  white 0%, ${isCartoons ?
+                 '#ffe0e0' :
+                 '#cdf1fa'} 70%, white 100%`,
+           }}>
         <Header
             user={session ? session.user ? session.user : null : null}
             logout={userSignOut}
@@ -58,18 +62,20 @@ function App() {
                 <Auth setNotAuth={setNotAuth}/> :
                 <Index user={session ? session.user : undefined}/>
           }
-          <Fab
-              onClick={() => setOpen(true)}
-              sx={{
-                position: 'absolute',
-                bottom: 30,
-                right: 30,
-              }} aria-label="Предложить"
-              color={['warning', 'success', 'primary', 'error'][Math.floor(
-                  Math.random() *
-                  4)]}>
-            <AddIcon/>
-          </Fab>
+          {session ?
+              <Fab
+                  onClick={() => setOpen(true)}
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    right: 30,
+                  }} aria-label="Предложить"
+                  color={['warning', 'success', 'primary', 'error'][Math.floor(
+                      Math.random() *
+                      4)]}>
+                <AddIcon/>
+              </Fab> : null
+          }
         </div>
       </div>
   );

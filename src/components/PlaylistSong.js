@@ -10,8 +10,9 @@ import {addToFavorite, updateColors} from '../database/methods';
 import RateColors from './RateColors';
 
 export default function PlaylistSong(
-    {id, expanded, handleChange, videoId, title, user, songId},
+    {id, expanded, handleChange, videoId, title, user, songId, isMy},
 ) {
+  console.log(isMy)
   return (
       <Accordion expanded={expanded}
                  onChange={handleChange(id)}
@@ -25,7 +26,7 @@ export default function PlaylistSong(
                           }}>
           <Typography>{title}</Typography>
         </AccordionSummary>
-        {user ? <div style={{display: 'flex', flexDirection: 'row'}}>
+        {(user && !isMy) ? <div style={{display: 'flex', flexDirection: 'row'}}>
           <Player videoId={videoId}/>
           <RateColors buttonScale={0.60} setCombinations={comb => {
             const fetchRequest = async () => {
