@@ -4,6 +4,7 @@ import {supabase} from './database/supabaseClient';
 import React, {useState, useEffect} from 'react';
 import Auth from './database/Auth';
 import {useDispatch, useSelector} from 'react-redux';
+import {Switch} from '@mui/material';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -23,12 +24,12 @@ function App() {
     });
   }, []);
   return (
-      <div className="App">
+      <div className="App" style={{background: `linear-gradient(to bottom,  white 0%, #e6e8fc 90%, white 100%`}}>
         <Header
             user={session ? session.user ? session.user : null : null}
             logout={userSignOut}
             setNotAuth={setNotAuth}
-        />
+          />
         <div className="Container" style={{
           display: 'flex',
           alignItems: 'center',

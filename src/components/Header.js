@@ -27,7 +27,7 @@ export default function Header({user, logout, setNotAuth}) {
                 {
                     user ?
                         <Button color={'inherit'} onClick={logout}><AccountCircle/></Button>
-                        : <Button color="inherit" onClick={() => setNotAuth(false)}>Login</Button>
+                        : <Button color="inherit" onClick={() => setNotAuth(false)}>Войти</Button>
                 }
             </Toolbar>
         </AppBar>
