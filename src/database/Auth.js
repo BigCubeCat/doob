@@ -41,6 +41,7 @@ export default function Auth({setNotAuth}) {
 
   return (
       <ThemeProvider theme={theme}>
+
         <Container component="main" maxWidth="xs">
           <CssBaseline/>
           {loading ? (
@@ -54,11 +55,12 @@ export default function Auth({setNotAuth}) {
                     alignItems: 'center',
                   }}
               >
-                <Avatar sx={{m: 1, bgcolor: 'primary.main'}}>
-                  <LockOutlinedIcon/>
-                </Avatar>
+                <h3>Цвет настроения...</h3>
+                <Avatar sx={{m: 1, bgcolor: 'black'}}>
+                <LockOutlinedIcon/>
+              </Avatar>
                 <Typography component="h1" variant="h5">
-                  Вход
+                  Авторизация
                 </Typography>
                 <Box component="form" onSubmit={handleLogin} noValidate
                      sx={{mt: 1}}>
@@ -68,16 +70,18 @@ export default function Auth({setNotAuth}) {
                       fullWidth
                       id="email"
                       label="Email Address"
+                      variant="standard"
                       name="email"
                       autoComplete="email"
                       autoFocus
+                      color={'warning'}
                       onChange={e => setEmail(e.target.value)}
                   />
                   <Button
                       type="submit"
                       fullWidth
                       variant="contained"
-                      sx={{mt: 3, mb: 1, bgcolor: 'primary.main'}}
+                      sx={{mt: 3, mb: 1, bgcolor: 'black'}}
                   >
                     Войти
                   </Button>
@@ -86,9 +90,9 @@ export default function Auth({setNotAuth}) {
                       onClick={() => setIsGuest(true)}
                       type="submit"
                       fullWidth
-                      sx={{mt: 1, mb: 2}}
+                      sx={{mt: 0, mb: 2, color: 'black'}}
                   >
-                    Зайти гостем
+                    Войти как гость
                   </Button></Box>
               </Box>
           }
