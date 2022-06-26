@@ -65,7 +65,7 @@ export async function getAllTracks() {
  * @returns {Promise<any[][]|*[]>}
  */
 export async function getTracksByColors(
-    colors, isCartoons,userSongs=[]) {
+    colors, isCartoons, userSongs = []) {
   if (userSongs.length === 0) {
     const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
         select().
@@ -133,7 +133,6 @@ export async function addToFavorite(user_id, track_id) {
   return null;
 }
 
-
 export async function createNewUserData(user_id) {
   const {data, err} = await supabase.from('user_data').
       select().
@@ -148,4 +147,14 @@ export async function createNewUserData(user_id) {
     });
   }
   return null;
+}
+
+export async function getUserFavorites(user_id) {
+  const {data, err} = await supabase.from('user_data').
+      select('tracks').
+      eq('user_id', user_id);
+  if (err) {
+    return;
+  }
+  return data[0]['tracks'];
 }
