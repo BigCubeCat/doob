@@ -29,13 +29,14 @@ async function addToMemory(id) {
  * @param {bool} isCartoons
  * @returns {Promise<null|*>}
  */
-export async function addNewTrack(title, link, comb, isCartoons=false) {
-  let {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').insert([
-    {
-      'title': title,
-      'link': link,
-      'combination': comb
-    }]);
+export async function addNewTrack(title, link, comb, isCartoons = false) {
+  let {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
+      insert([
+        {
+          'title': title,
+          'link': link,
+          'combination': comb,
+        }]);
   if (err) {
     return err;
   }
@@ -60,17 +61,30 @@ export async function getAllTracks() {
 /**
  * @param colors {string}
  * @param isCartoons {bool}
+ * @param userSongs {Array}
  * @returns {Promise<any[][]|*[]>}
  */
-export async function getTracksByColors(colors, isCartoons) {
-  const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
-      select().
-      eq('combination', colors).
-      limit(SELECT_LIMIT);
-  if (err) {
-    return [null, err];
+export async function getTracksByColors(
+    colors, isCartoons, userSongs = []) {
+  if (userSongs == null) {
+    const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
+        select().
+        eq('combination', colors).
+        limit(SELECT_LIMIT);
+    if (err) {
+      return [null, err];
+    }
+    return [data, null];
+  } else {
+    const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
+        select().eq('combination', colors).in('id', userSongs).
+        limit(SELECT_LIMIT);
+
+    if (err) {
+      return [null, err];
+    }
+    return [data, null];
   }
-  return [data, null];
 }
 
 /**
@@ -104,3 +118,52 @@ export async function updateColors(track_id, colors) {
   return null;
 }
 
+export async function addToFavorite(user_id, track_id) {
+  const {data, err} = await supabase.from('user_data').
+      select('tracks').
+      eq('user_id', user_id);
+  if (err) {
+    return;
+  }
+  let arr = data[0]['tracks'];
+  arr.push(track_id);
+  await supabase.from('user_data').
+      update({'tracks': arr}).
+      eq('user_id', user_id);
+  return null;
+}
+
+export async function createNewUserData(user_id) {
+  const {data, err} = await supabase.from('user_data').
+      select().
+      eq('user_id', user_id);
+  if (err) {
+    console.error(err)
+    return ;
+  }
+  if (data.length == 0) {
+    console.log("HEHRHRHRHRH")
+    const {data, err} = (await supabase.from('user_data').insert({
+      'user_id': user_id,
+      'tracks': [],
+    }));
+    console.log(err)
+    console.log("data = ", data)
+  }
+  return null;
+}
+
+export async function getUserFavorites(user_id) {
+  if (!user_id) return ;
+  const {data, err} = await supabase.from('user_data').
+      select('tracks').
+      eq('user_id', user_id);
+  if (err) {
+    return;
+  }
+  try {
+    return data[0]['tracks'];
+  } catch (e) {
+    return ;
+  }
+}
