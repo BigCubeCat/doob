@@ -46,9 +46,9 @@ export default function Playlist({combination, user}) {
         <Tabs
             value={tabId}
             onChange={(event, value) => setTabId(value)}
-            textColor="secondary"
+            textColor="primary"
             variant="fullWidth"
-            indicatorColor="secondary"
+            indicatorColor="primary"
             aria-label="secondary tabs example"
         >
           <Tab value={0} label="Все"/>

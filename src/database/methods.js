@@ -117,3 +117,35 @@ export async function updateColors(track_id, colors) {
   await addToMemory(track_id);
   return null;
 }
+
+export async function addToFavorite(user_id, track_id) {
+  const {data, err} = await supabase.from('user_data').
+      select('tracks').
+      eq('user_id', user_id);
+  if (err) {
+    return;
+  }
+  let arr = data[0]['tracks'];
+  arr.push(track_id);
+  await supabase.from('user_data').
+      update({'tracks': arr}).
+      eq('user_id', user_id);
+  return null;
+}
+
+
+export async function createNewUserData(user_id) {
+  const {data, err} = await supabase.from('user_data').
+      select().
+      eq('user_id', user_id);
+  if (err) {
+    return;
+  }
+  if (data.length === 0) {
+    await supabase.from('user_data').insert({
+      'user_id': user_id,
+      'tracks': [],
+    });
+  }
+  return null;
+}
