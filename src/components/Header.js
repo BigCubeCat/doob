@@ -12,7 +12,6 @@ import {Switch} from '@mui/material';
 export default function Header({user, logout, setNotAuth, isAuthWindow}) {
   const dispatch = useDispatch(); // Получаем диспатч из хука
   const isCartoons = useSelector(state => state).is_cartoons;
-<<<<<<< HEAD
   let rightButton;
   if (!isAuthWindow) {
     rightButton = (user) ?
@@ -21,39 +20,17 @@ export default function Header({user, logout, setNotAuth, isAuthWindow}) {
         <Button color="inherit"
                 onClick={() => setNotAuth(false)}>Войти</Button>;
   }
-  return (<AppBar position="static"
-                  style={{background: isCartoons ? '#cf1302' : '#5edfff'}}>
-    <Toolbar>
-      <Switch color="default" onClick={() => {
-        dispatch(setIsCartoons(true));
-      }}/>
-      <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-        d(o.o)b {isCartoons ? "Kids" : null}
-      </Typography>
-      {rightButton}
-    </Toolbar>
-  </AppBar>);
-=======
   return (
-
-      <AppBar position="static" style={{background: isCartoons ? "#cf1302" : '#1DB954'}}>
+      <AppBar position="static"
+              style={{background: isCartoons ? '#cf1302' : '#1DB954'}}>
         <Toolbar>
           <Switch color="default" onClick={() => {
             dispatch(setIsCartoons(true));
           }}/>
           <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-            d(o.o)b
+            d(o.o)b {isCartoons ? 'Kids' : null}
           </Typography>
-          {
-            user ?
-                <Button color={'inherit'}
-                        onClick={logout}><AccountCircle/></Button>
-                :
-                <Button color="inherit"
-                        onClick={() => setNotAuth(false)}>Войти</Button>
-          }
+          {rightButton}
         </Toolbar>
-      </AppBar>
-  );
->>>>>>> 20564351b051e7c80b200d3ff88539b3c07942db
+      </AppBar>);
 }
