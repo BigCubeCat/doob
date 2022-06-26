@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Player from './Player';
-import {updateColors} from '../database/methods';
+import {addToFavorite, updateColors} from '../database/methods';
 import RateColors from './RateColors';
 
 export default function PlaylistSong(
@@ -30,6 +30,7 @@ export default function PlaylistSong(
           <RateColors buttonScale={0.60} setCombinations={comb => {
             const fetchRequest = async () => {
               await updateColors(songId, comb);
+              await addToFavorite(user.id, songId);
             };
             fetchRequest().catch(console.error);
           }}
