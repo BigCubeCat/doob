@@ -39,9 +39,10 @@ function App() {
   if (open) {
     return songDialog;
   }
+  // #e6e8fc #2E3B55
   return (
       <div className="App"
-           style={{background: `linear-gradient(to bottom,  white 0%, ${isCartoons ? '#ffe0e0' : '#e6e8fc'} 70%, white 100%`}}>
+           style={{background: `linear-gradient(to bottom,  white 0%, ${isCartoons ? '#ffe0e0' : '#cdf1fa'} 70%, white 100%`}}>
         <Header
             user={session ? session.user ? session.user : null : null}
             logout={userSignOut}

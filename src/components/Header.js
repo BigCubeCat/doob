@@ -14,7 +14,7 @@ export default function Header({user, logout, setNotAuth}) {
   const isCartoons = useSelector(state => state).is_cartoons;
   return (
 
-      <AppBar position="static" style={{background: isCartoons ? "#cf1302" : '#2E3B55'}}>
+      <AppBar position="static" style={{background: isCartoons ? "#cf1302" : '#5edfff'}}>
         <Toolbar>
           <Switch color="default" onClick={() => {
             dispatch(setIsCartoons(true));

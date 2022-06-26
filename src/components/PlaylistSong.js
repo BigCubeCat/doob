@@ -21,7 +21,7 @@ export default function PlaylistSong(
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"
                           style={{
                             textAlign: 'left', background:
-                                `linear-gradient(to right,  #edeffa 0%,white 50%, #edeffa 100%)`,
+                                `linear-gradient(to right,  #f7fdff 0%,white 50%, #f7fdff 100%)`,
                           }}>
           <Typography>{title}</Typography>
         </AccordionSummary>

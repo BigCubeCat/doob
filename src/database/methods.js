@@ -29,13 +29,14 @@ async function addToMemory(id) {
  * @param {bool} isCartoons
  * @returns {Promise<null|*>}
  */
-export async function addNewTrack(title, link, comb, isCartoons=false) {
-  let {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').insert([
-    {
-      'title': title,
-      'link': link,
-      'combination': comb
-    }]);
+export async function addNewTrack(title, link, comb, isCartoons = false) {
+  let {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
+      insert([
+        {
+          'title': title,
+          'link': link,
+          'combination': comb,
+        }]);
   if (err) {
     return err;
   }
@@ -103,4 +104,3 @@ export async function updateColors(track_id, colors) {
   await addToMemory(track_id);
   return null;
 }
-
