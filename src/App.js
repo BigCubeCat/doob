@@ -4,13 +4,22 @@ import {supabase} from './database/supabaseClient';
 import React, {useState, useEffect} from 'react';
 import Auth from './database/Auth';
 import {useDispatch, useSelector} from 'react-redux';
-import {Switch} from '@mui/material';
+import {Fab, Switch} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import AddSong from './components/AddSong';
 
 function App() {
   const [session, setSession] = useState(null);
-  const dispatch = useDispatch();
-  const currentWindow = useSelector(state => state).window_id;
   const [notAuth, setNotAuth] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const userSignOut = () => {
     supabase.auth.signOut();
@@ -23,13 +32,20 @@ function App() {
       setSession(session);
     });
   }, []);
+
+  const songDialog = <AddSong open={open} handleClose={handleClose} />
+
+  if (open) {
+    return songDialog;
+  }
   return (
-      <div className="App" style={{background: `linear-gradient(to bottom,  white 0%, #e6e8fc 90%, white 100%`}}>
+      <div className="App"
+           style={{background: `linear-gradient(to bottom,  white 0%, #e6e8fc 90%, white 100%`}}>
         <Header
             user={session ? session.user ? session.user : null : null}
             logout={userSignOut}
             setNotAuth={setNotAuth}
-          />
+        />
         <div className="Container" style={{
           display: 'flex',
           alignItems: 'center',
@@ -40,6 +56,18 @@ function App() {
                 <Auth setNotAuth={setNotAuth}/> :
                 <Index user={session ? session.user : undefined}/>
           }
+          <Fab
+              onClick={() => setOpen(true)}
+              sx={{
+                position: 'absolute',
+                bottom: 30,
+                right: 30,
+              }} aria-label="Предложить"
+              color={['warning', 'success', 'primary', 'error'][Math.floor(
+                  Math.random() *
+                  4)]}>
+            <AddIcon/>
+          </Fab>
         </div>
       </div>
   );
