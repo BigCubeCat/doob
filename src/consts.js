@@ -10,3 +10,4 @@ export const HEX_COLORS = [
   '#c65223',
 ];
 export const COLOR_BUTTON_SIZE = 49;
+export const COLOR_BUTTON_SELECTED = 30;

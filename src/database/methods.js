@@ -1,22 +1,23 @@
-import {supabase} from './supabaseClient';
-import {SELECT_LIMIT} from '../consts';
+import {supabase} from './supabaseClient.js';
+import {SELECT_LIMIT} from '../consts.js';
 
 /**
  * Adding edited row id to memory table2
- * @param supabase
  * @param id {int}
  * @returns {Promise<*|null|*>}
  */
-async function addToMemory(supabase, id) {
-  let {data, err} = await supabase.from('memory').select('ids').eq('id', 0);
+async function addToMemory(id) {
+  let {data, err} = await supabase.from('memory').select().eq('id', 0);
   if (err) {
     return err;
   }
-  data.push(id);
-  err = await supabase.from('memory').update({'ids': data});
-  if (err) {
-    return err;
+  if (data[0]['ids'].includes(id)) {
+    return null;
   }
+  data[0]['ids'].push(id);
+  await supabase.from('memory').
+      update({'ids': data[0]['ids']}).
+      eq('id', 0);
   return null;
 }
 
@@ -24,13 +25,16 @@ async function addToMemory(supabase, id) {
  *Creates new row in "Tracks" table and new row in "Rates" table
  * @param {string} title Track title
  * @param {string} link Track youtube url
+ * @param {string} comb combination
+ * @param {bool} isCartoons
  * @returns {Promise<null|*>}
  */
-export async function addNewTrack(title, link) {
-  let {data, err} = await supabase.from('tracks').insert([
+export async function addNewTrack(title, link, comb, isCartoons=false) {
+  let {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').insert([
     {
       'title': title,
       'link': link,
+      'combination': comb
     }]);
   if (err) {
     return err;
@@ -55,10 +59,11 @@ export async function getAllTracks() {
 
 /**
  * @param colors {string}
+ * @param isCartoons {bool}
  * @returns {Promise<any[][]|*[]>}
  */
-export async function getTracksByColors(colors) {
-  const {data, err} = await supabase.from('tracks').
+export async function getTracksByColors(colors, isCartoons) {
+  const {data, err} = await supabase.from(isCartoons ? 'cartoons' : 'tracks').
       select().
       eq('combination', colors).
       limit(SELECT_LIMIT);
@@ -75,29 +80,27 @@ export async function getTracksByColors(colors) {
  * @returns {Promise<null|*>}
  */
 export async function updateColors(track_id, colors) {
-  const {data, err} = await supabase.from('tracks').select().eq('id', track_id);
+  let {data, err} = await supabase.from('tracks').select().eq('id', track_id);
   if (err) {
     return err;
   }
   let trackStats = [
-    data[0]['red'],
-    data[0]['green'],
-    data[0]['blue'],
-    data[0]['yellow'],
-    data[0]['black'],
-    data[0]['gray'],
-    data[0]['pink'],
-    data[0]['brown'],
+    data[0]['rates'][0],
+    data[0]['rates'][1],
+    data[0]['rates'][2],
+    data[0]['rates'][3],
+    data[0]['rates'][4],
+    data[0]['rates'][5],
+    data[0]['rates'][6],
+    data[0]['rates'][7],
   ];
   for (const colorId of colors) {
-    trackStats[colorId]++;
+    trackStats[colorId - 0]++;
   }
-  const {errNext} = await supabase.from('track').
+  await supabase.from('tracks').
       update({'rates': trackStats}).
       eq('id', track_id);
-  if (errNext) {
-    return errNext;
-  }
+  await addToMemory(track_id);
   return null;
 }
 

@@ -1,34 +1,76 @@
-import Header from "./components/Header";
-import Index from "./components/Index";
-import {supabase} from "./database/supabaseClient";
-import React, {useState, useEffect} from "react";
-import Auth from "./database/Auth";
-import {useDispatch, useSelector} from "react-redux";
+import Header from './components/Header';
+import Index from './components/Index';
+import {supabase} from './database/supabaseClient';
+import React, {useState, useEffect} from 'react';
+import Auth from './database/Auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {Fab, Switch} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import AddSong from './components/AddSong';
 
 function App() {
-    const [session, setSession] = useState(null)
-    const dispatch = useDispatch();
-    const currentWindow = useSelector(state => state).window_id;
+  const [session, setSession] = useState(null);
+  const [notAuth, setNotAuth] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
-    const userSignOut = () => {
-        supabase.auth.signOut();
-    }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    useEffect(() => {
-        setSession(supabase.auth.session())
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-        supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session)
-        })
-    }, [])
-    return (
-        <div className="App">
-            <Header user={session ? session.user ? session.user : null : null} logout={userSignOut}/>
-            <div className="Container" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                {!session ? <Auth/> : <Index/>}
-            </div>
+  const userSignOut = () => {
+    supabase.auth.signOut();
+  };
+
+  useEffect(() => {
+    setSession(supabase.auth.session());
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
+  const songDialog = <AddSong open={open} handleClose={handleClose} />
+
+  if (open) {
+    return songDialog;
+  }
+  return (
+      <div className="App"
+           style={{background: `linear-gradient(to bottom,  white 0%, #e6e8fc 90%, white 100%`}}>
+        <Header
+            user={session ? session.user ? session.user : null : null}
+            logout={userSignOut}
+            setNotAuth={setNotAuth}
+        />
+        <div className="Container" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          {
+            (!session && !notAuth) ?
+                <Auth setNotAuth={setNotAuth}/> :
+                <Index user={session ? session.user : undefined}/>
+          }
+          <Fab
+              onClick={() => setOpen(true)}
+              sx={{
+                position: 'absolute',
+                bottom: 30,
+                right: 30,
+              }} aria-label="Предложить"
+              color={['warning', 'success', 'primary', 'error'][Math.floor(
+                  Math.random() *
+                  4)]}>
+            <AddIcon/>
+          </Fab>
         </div>
-    );
+      </div>
+  );
 }
 
 export default App;
