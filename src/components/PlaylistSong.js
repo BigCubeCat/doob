@@ -8,22 +8,24 @@ import Typography from '@mui/material/Typography';
 import Player from './Player';
 import {addToFavorite, updateColors} from '../database/methods';
 import RateColors from './RateColors';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+
 
 export default function PlaylistSong(
     {id, expanded, handleChange, videoId, title, user, songId, isMy},
 ) {
-  console.log(isMy)
   return (
+
       <Accordion expanded={expanded}
                  onChange={handleChange(id)}
                  disableGutters={true}
                  square={false}
                  style={{maxHeight: user ? '100%' : '222px'}}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"
+                          expandIcon={<ArrowForwardIosSharpIcon
+                              sx={{fontSize: '0.9rem'}}/>}
                           style={{
-                            textAlign: 'left', background:
-                                `linear-gradient(to right,  #f7fdff 0%,white 50%, #f7fdff 100%)`,
-                          }}>
+                            textAlign: 'left'}}>
           <Typography>{title}</Typography>
         </AccordionSummary>
         {(user && !isMy) ? <div style={{display: 'flex', flexDirection: 'row'}}>
