@@ -53,9 +53,10 @@ export default function Colors({buttonScale = 1, setCombinations}) {
                             }}
                             elevation={10}
                         >
-                          { /*
-                            combination.includes(value * 4 + val) ?  <img src='/frame.png' width={COLOR_BUTTON_SIZE} /> : null
-                          */}
+                          {(isCartoons) ?
+                              <img src={'/cartoons/' + (value * 4 + val) +
+                                  '.png'} width={COLOR_BUTTON_SIZE * 0.80}/> :
+                              null}
                         </Paper>
                       </Grid>
                   ))}
