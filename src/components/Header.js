@@ -7,26 +7,18 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import {useDispatch, useSelector} from 'react-redux';
 import {setIsCartoons} from '../store/actions';
+import {Switch} from '@mui/material';
 
 export default function Header({user, logout, setNotAuth}) {
   const dispatch = useDispatch(); // Получаем диспатч из хука
   const isCartoons = useSelector(state => state).is_cartoons;
   return (
 
-      <AppBar position="static" style={{background: '#2E3B55'}}>
+      <AppBar position="static" style={{background: isCartoons ? "#cf1302" : '#2E3B55'}}>
         <Toolbar>
-          <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{mr: 2}}
-              onClick={() => {
-                dispatch(setIsCartoons(true))} // not matter true or false)
-              }
-          >
-            <img src="/logo.png" height="48px" alt="d(o.o)b"/>
-          </IconButton>
+          <Switch color="default" onClick={() => {
+            dispatch(setIsCartoons(true));
+          }}/>
           <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
             d(o.o)b
           </Typography>

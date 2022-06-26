@@ -6,6 +6,9 @@ import {useSelector} from 'react-redux';
 
 function getTrackId(url) {
   if (url.includes('.be/')) {
+    if (url.includes('?list=')) {
+      return url.split('.be/')[1].split('?list=')[0];
+    }
     return url.split('.be/')[1];
   }
   return url.split('v=')[1];

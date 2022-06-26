@@ -3,12 +3,13 @@ import Index from './components/Index';
 import {supabase} from './database/supabaseClient';
 import React, {useState, useEffect} from 'react';
 import Auth from './database/Auth';
-import {useDispatch, useSelector} from 'react-redux';
-import {Fab, Switch} from '@mui/material';
+import {useSelector} from 'react-redux';
+import {Fab} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import AddSong from './components/AddSong';
 
 function App() {
+  const isCartoons = useSelector(state => state).is_cartoons;
   const [session, setSession] = useState(null);
   const [notAuth, setNotAuth] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -40,7 +41,7 @@ function App() {
   }
   return (
       <div className="App"
-           style={{background: `linear-gradient(to bottom,  white 0%, #e6e8fc 90%, white 100%`}}>
+           style={{background: `linear-gradient(to bottom,  white 0%, ${isCartoons ? '#ffe0e0' : '#e6e8fc'} 70%, white 100%`}}>
         <Header
             user={session ? session.user ? session.user : null : null}
             logout={userSignOut}
