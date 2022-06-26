@@ -25,13 +25,15 @@ async function addToMemory(id) {
  *Creates new row in "Tracks" table and new row in "Rates" table
  * @param {string} title Track title
  * @param {string} link Track youtube url
+ * @param {string} comb combination
  * @returns {Promise<null|*>}
  */
-export async function addNewTrack(title, link) {
+export async function addNewTrack(title, link, comb) {
   let {data, err} = await supabase.from('tracks').insert([
     {
       'title': title,
       'link': link,
+      'combination': comb
     }]);
   if (err) {
     return err;

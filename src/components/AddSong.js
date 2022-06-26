@@ -11,6 +11,7 @@ import Slide from '@mui/material/Slide';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import {addNewTrack} from '../database/methods';
+import RateColors from './RateColors';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -21,8 +22,9 @@ export default function AddSong({open, handleClose}) {
       'https://youtu.be/dQw4w9WgXcQ');
 
   const [title, setTitle] = React.useState('Rickrolled!');
+  const [combinations, setCombinations] = React.useState('00');
   const submitRequest = async () => {
-    await addNewTrack(title, textLink);
+    await addNewTrack(title, textLink, combinations);
   }
   return (
       <Dialog
@@ -77,6 +79,7 @@ export default function AddSong({open, handleClose}) {
               value={textLink}
               onChange={e => setTextLink(e.target.value)}
           />
+          <RateColors buttonScale={0.60} setCombinations={setCombinations} />
         </Box>
       </Dialog>
   );
