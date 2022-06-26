@@ -33,9 +33,20 @@ export default function Colors({buttonScale = 1, setCombinations}) {
   }
   return (
       <div style={{padding: 10}}>
-        <h4 style={{color: '#424242'}}>Мы тебя понимаем!
-          <br/>
-          Выбери цвет и получи персональную подборку контента</h4>
+        <h4 style={{color: '#424242'}}>
+          {
+            (isCartoons) ?
+                'Мультики ждут тебя ;)'
+                : 'Мы тебя понимаем!'
+          }
+        </h4>
+        <h4 style={{color: '#424242'}}>
+          {
+            (isCartoons) ?
+                'Выбери 2 картинки! Какие тебе сейчас нравятся?'
+                : 'Выбери цвет и получи персональную подборку контента'
+          }
+        </h4>
         <Grid sx={{flexGrow: 1}} container spacing={2}>
           {[0, 1].map((value) => (
               <Grid item xs={12}>
@@ -49,7 +60,9 @@ export default function Colors({buttonScale = 1, setCombinations}) {
                               width: COLOR_BUTTON_SIZE * buttonScale,
                               borderRadius: combination.includes(
                                   value * 4 + val) ? 3 : 10,
-                              backgroundColor: HEX_COLORS[value * 4 + val],
+                              backgroundColor: (!isCartoons) ?
+                                  HEX_COLORS[value * 4 + val] :
+                                  '#D1cfcf',
                             }}
                             elevation={10}
                         >
