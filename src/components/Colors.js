@@ -33,7 +33,8 @@ export default function Colors({buttonScale = 1, setCombinations}) {
   }
   return (
       <div style={{padding: 10}}>
-        <h3 style={{color: '#424242'}}>Выберите два различных цвета, чтобы получить подборку {isCartoons ? "мультиков" : "музыки"}</h3>
+        <h3 style={{color: '#424242'}}>Выберите два различных цвета, чтобы
+          получить подборку {isCartoons ? 'мультиков' : 'музыки'}</h3>
         <Grid sx={{flexGrow: 1}} container spacing={2}>
           {[0, 1].map((value) => (
               <Grid item xs={12}>
@@ -51,9 +52,7 @@ export default function Colors({buttonScale = 1, setCombinations}) {
                             }}
                             elevation={10}
                         >
-                          { /*
-                            combination.includes(value * 4 + val) ?  <img src='/frame.png' width={COLOR_BUTTON_SIZE} /> : null
-                          */}
+                          {(isCartoons) ? <img src={'/cartoons/' + (value * 4 + val) + '.png'} width={COLOR_BUTTON_SIZE * 0.80} /> : null}
                         </Paper>
                       </Grid>
                   ))}
