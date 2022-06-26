@@ -8,7 +8,7 @@ export default function RateColors({buttonScale = 1, setCombinations}) {
   const isCartoons = useSelector(state => state).is_cartoons;
   const [combination, setCombination] = useState([]);
   const [combinationString, setCombinationString] = useState('');
-
+  const flag = false;
   const handleClick = id => {
     if (combination.length < 2 && !combination.includes(id)) {
       setCombination([...combination, id]);
@@ -27,7 +27,6 @@ export default function RateColors({buttonScale = 1, setCombinations}) {
       combString = combination[0] + '' + combination[1];
     }
     setCombinations(combString);
-
   }
   return (
       <div style={{padding: 10}}>

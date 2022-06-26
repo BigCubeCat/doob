@@ -24,6 +24,7 @@ export default function PlaylistSong(
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"
                           expandIcon={<ArrowForwardIosSharpIcon
                               sx={{fontSize: '0.9rem'}}/>}
+                          TransitionProps={{ unmountOnExit: true }}
                           style={{
                             textAlign: 'left'}}>
           <Typography>{title}</Typography>
